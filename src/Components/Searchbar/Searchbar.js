@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
 
 class Searchbar extends Component {
   state = {
@@ -9,7 +10,7 @@ class Searchbar extends Component {
     e.preventDefault();
 
     if (this.state.imageName.trim() === '') {
-      alert('Введи назву картинки');
+      toast('Введіть назву картинки');
       return;
     }
     this.props.onSubmit(this.state.imageName);

@@ -1,10 +1,10 @@
 import React from 'react';
 import ImageGalleryItem from './ImageGalleryItem';
 
-const ImageGallery = () => {
+const ImageGallery = ({ imageName }) => {
   return (
     <ul className="gallery">
-      <ImageGalleryItem />
+      <ImageGalleryItem imageName={imageName} />
     </ul>
   );
 };
