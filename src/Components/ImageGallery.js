@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ImageGalleryItem from './ImageGalleryItem';
+import Loader from './Loader';
 
 class ImageGallery extends Component {
   state = {
@@ -35,7 +36,7 @@ class ImageGallery extends Component {
       return <div>You must enter query parameters!</div>;
     }
     if (status === 'pending') {
-      return <div>Loading...</div>;
+      return <Loader />;
     }
     if (status === 'rejected') {
       return <h2>{error.message}</h2>;
