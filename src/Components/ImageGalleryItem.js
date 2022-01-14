@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ImageGalleryItem = ({ imageName }) => {
+const ImageGalleryItem = ({ imageName, imageUrl }) => {
   return (
     <li className="gallery-item">
-      <img src="" alt={imageName} />
+      <img src={imageUrl} alt={imageName} />
     </li>
   );
 };
