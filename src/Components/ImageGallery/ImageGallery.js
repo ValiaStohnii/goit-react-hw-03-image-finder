@@ -34,7 +34,7 @@ class ImageGallery extends Component {
     const { image, error, status } = this.state;
 
     if (status === 'idle') {
-      return <div>You must enter query parameters!</div>;
+      return <div className="Notification">You must enter query parameters!</div>;
     }
     if (status === 'pending') {
       return <Loader />;
