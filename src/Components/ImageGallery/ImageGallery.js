@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import ImageGalleryItem from './ImageGalleryItem';
-import Loader from './Loader';
+import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
+import Loader from '../Loader';
+import './ImageGallery.css';
 
 class ImageGallery extends Component {
   state = {
@@ -44,7 +45,7 @@ class ImageGallery extends Component {
     if (status === 'resolved') {
       return (
         <div>
-          <ul className="gallery">
+          <ul className="ImageGallery">
             {image.hits.map(entry => (
               <ImageGalleryItem
                 key={entry.id}
