@@ -1,10 +1,15 @@
 import React from 'react';
 import './ImageGalleryItem.css';
 
-const ImageGalleryItem = ({ imageName, imageUrl }) => {
+const ImageGalleryItem = ({ imageName, imageUrl, onImageClick }) => {
   return (
     <li className="ImageGalleryItem">
-      <img className="ImageGalleryItem-image" src={imageUrl} alt={imageName} />
+      <img
+        onClick={onImageClick}
+        className="ImageGalleryItem-image"
+        src={imageUrl}
+        alt={imageName}
+      />
     </li>
   );
 };

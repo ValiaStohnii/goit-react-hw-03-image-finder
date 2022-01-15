@@ -28,7 +28,7 @@ class App extends Component {
       <div className="App">
         <Searchbar onSubmit={this.formSubmit} />
         <ToastContainer />
-        <ImageGallery imageName={this.state.imageName} />
+        <ImageGallery imageName={this.state.imageName} onImageClick={this.toggleModal} />
         {showModal && <Modal onClose={this.toggleModal} />}
         <Button />
       </div>

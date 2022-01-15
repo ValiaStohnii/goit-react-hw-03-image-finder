@@ -30,6 +30,7 @@ class ImageGallery extends Component {
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
   }
+
   render() {
     const { image, error, status } = this.state;
 
@@ -51,6 +52,7 @@ class ImageGallery extends Component {
                 key={entry.id}
                 imageName={entry.tags}
                 imageUrl={entry.webformatURL}
+                onImageClick={this.props.onImageClick}
               />
             ))}
           </ul>
