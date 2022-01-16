@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import Loader from '../Loader';
 import Button from '../Button/Button';
+import imageApi from '../services/image-api';
 import './ImageGallery.css';
 
 class ImageGallery extends Component {
@@ -9,27 +10,33 @@ class ImageGallery extends Component {
     image: null,
     error: null,
     status: 'idle',
+    page: 1,
   };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.imageName !== this.props.imageName) {
       this.setState({ status: 'pending' });
+      this.setState({ page: 1 });
 
-      fetch(
-        `https://pixabay.com/api/?key=24200424-23477fc3694bee0d0a7f46301&page=1&q=${this.props.imageName}&image_type=photo&orientation=horizontal&per_page=12`,
-      )
-        .then(r => {
-          if (r.ok) {
-            return r.json();
-          }
-          return Promise.reject(new Error(`Please enter a more specific query`));
-        })
-        .then(image => {
-          this.setState({ image, status: 'resolved' });
-        })
+      imageApi
+        .fetchImage(this.props.imageName, prevState.page)
+        .then(image => this.setState({ image, status: 'resolved' }))
+        .catch(error => this.setState({ error, status: 'rejected' }));
+    }
+
+    if (prevState.page !== this.state.page) {
+      imageApi
+        .fetchImage(this.props.imageName, this.state.page)
+        .then(image => this.setState({ image, status: 'resolved' }))
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
   }
+
+  incrementPage = () => {
+    this.setState(state => ({
+      page: (state.page += 1),
+    }));
+  };
 
   render() {
     const { image, error, status } = this.state;
@@ -57,7 +64,7 @@ class ImageGallery extends Component {
               />
             ))}
           </ul>
-          <Button />
+          <Button onClick={this.incrementPage} />
         </div>
       );
     }
