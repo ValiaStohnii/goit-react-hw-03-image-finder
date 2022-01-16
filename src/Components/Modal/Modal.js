@@ -14,7 +14,7 @@ class Modal extends Component {
   }
 
   keyDown = e => {
-    if (e.code === 'EScape') {
+    if (e.code === 'Escape') {
       this.props.onClose();
     }
   };
