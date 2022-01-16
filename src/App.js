@@ -16,10 +16,10 @@ class App extends Component {
     this.setState({ imageName });
   };
 
-  toggleModal = (url, alt) => {
+  toggleModal = ({ url }) => {
     this.setState(state => ({
       showModal: !state.showModal,
-      selectIMG: { url, alt },
+      selectIMG: { url },
     }));
   };
 
@@ -32,7 +32,7 @@ class App extends Component {
         <ImageGallery imageName={imageName} onImageClick={this.toggleModal} />
         {showModal && (
           <Modal onClose={this.toggleModal}>
-            <img srs={selectIMG.url} alt={selectIMG.alt} />
+            <img src={selectIMG.url} alt={imageName} />
           </Modal>
         )}
       </div>
