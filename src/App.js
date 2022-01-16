@@ -3,34 +3,38 @@ import { ToastContainer } from 'react-toastify';
 import './App.css';
 import Searchbar from './Components/Searchbar/Searchbar';
 import ImageGallery from './Components/ImageGallery/ImageGallery';
-import Button from './Components/Button/Button';
 import Modal from './Components/Modal/Modal';
 
 class App extends Component {
   state = {
     imageName: '',
     showModal: false,
+    selectIMG: '',
   };
 
   formSubmit = imageName => {
     this.setState({ imageName });
   };
 
-  toggleModal = () => {
+  toggleModal = (url, alt) => {
     this.setState(state => ({
       showModal: !state.showModal,
+      selectIMG: { url, alt },
     }));
   };
 
   render() {
-    const { showModal } = this.state;
+    const { showModal, imageName, selectIMG } = this.state;
     return (
       <div className="App">
         <Searchbar onSubmit={this.formSubmit} />
         <ToastContainer />
-        <ImageGallery imageName={this.state.imageName} onImageClick={this.toggleModal} />
-        {showModal && <Modal onClose={this.toggleModal} />}
-        <Button />
+        <ImageGallery imageName={imageName} onImageClick={this.toggleModal} />
+        {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <img srs={selectIMG.url} alt={selectIMG.alt} />
+          </Modal>
+        )}
       </div>
     );
   }

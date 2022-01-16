@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import Loader from '../Loader';
+import Button from '../Button/Button';
 import './ImageGallery.css';
 
 class ImageGallery extends Component {
@@ -25,7 +26,6 @@ class ImageGallery extends Component {
         })
         .then(image => {
           this.setState({ image, status: 'resolved' });
-          console.log(image.hits);
         })
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
@@ -53,9 +53,11 @@ class ImageGallery extends Component {
                 imageName={entry.tags}
                 imageUrl={entry.webformatURL}
                 onImageClick={this.props.onImageClick}
+                largeIMG={entry.largeImageURL}
               />
             ))}
           </ul>
+          <Button />
         </div>
       );
     }
