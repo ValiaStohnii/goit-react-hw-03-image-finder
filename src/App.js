@@ -16,6 +16,12 @@ class App extends Component {
     this.setState({ imageName });
   };
 
+  toggleShowModal = () => {
+    this.setState(state => ({
+      showModal: !state.showModal,
+    }));
+  };
+
   toggleModal = ({ largeIMG }) => {
     this.setState(state => ({
       showModal: !state.showModal,
@@ -31,7 +37,7 @@ class App extends Component {
         <ToastContainer />
         <ImageGallery imageName={imageName} onImageClick={this.toggleModal} />
         {showModal && (
-          <Modal onClose={this.toggleModal}>
+          <Modal onClose={this.toggleShowModal}>
             <img src={selectIMG} alt={imageName} />
           </Modal>
         )}
