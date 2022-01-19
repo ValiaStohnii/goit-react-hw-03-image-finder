@@ -23,14 +23,16 @@ class ImageGallery extends Component {
         .then(image => this.setState({ image, status: 'resolved' }))
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
-    const oldImage = prevState.image;
 
     if (prevState.page !== this.state.page) {
       imageApi
         .fetchImage(this.props.imageName, this.state.page)
         .then(image => {
-          const newImage = image;
-          this.setState({ image: [...oldImage, ...newImage], status: 'resolved' });
+          console.log(image);
+          this.setState(prevState => {
+            console.log(prevState.image);
+            return { image: [...prevState.image, ...image], status: 'resolved' };
+          });
         })
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
