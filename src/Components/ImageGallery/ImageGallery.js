@@ -7,7 +7,7 @@ import './ImageGallery.css';
 
 class ImageGallery extends Component {
   state = {
-    image: null,
+    image: [],
     error: null,
     status: 'idle',
     page: 1,
@@ -20,18 +20,17 @@ class ImageGallery extends Component {
 
       imageApi
         .fetchImage(this.props.imageName, prevState.page)
-        .then(image => this.setState({ image, status: 'resolved' }))
+        .then(({ hits }) => this.setState({ image: hits, status: 'resolved' }))
         .catch(error => this.setState({ error, status: 'rejected' }));
     }
 
     if (prevState.page !== this.state.page) {
       imageApi
         .fetchImage(this.props.imageName, this.state.page)
-        .then(image => {
-          console.log(image);
+        .then(({ hits }) => {
           this.setState(prevState => {
             console.log(prevState.image);
-            return { image: [...prevState.image, ...image], status: 'resolved' };
+            return { image: [...prevState.image, ...hits], status: 'resolved' };
           });
         })
         .catch(error => this.setState({ error, status: 'rejected' }));
@@ -60,7 +59,7 @@ class ImageGallery extends Component {
       return (
         <div>
           <ul className="ImageGallery">
-            {image.hits.map(entry => (
+            {image.map(entry => (
               <ImageGalleryItem
                 key={entry.id}
                 imageName={entry.tags}
