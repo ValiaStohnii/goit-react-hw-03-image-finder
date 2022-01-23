@@ -29,7 +29,6 @@ class ImageGallery extends Component {
         .fetchImage(this.props.imageName, this.state.page)
         .then(({ hits }) => {
           this.setState(prevState => {
-            console.log(prevState.image);
             return { image: [...prevState.image, ...hits], status: 'resolved' };
           });
         })
